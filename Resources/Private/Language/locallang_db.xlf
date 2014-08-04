@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-08-04T17:09:12Z" product-name="be_links">
+		<header/>
+		<body>
+			<trans-unit id="tx_belinks_link">
+				<source>Backend link</source>
+			</trans-unit>
+			<trans-unit id="tx_belinks_link.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_belinks_link.type">
+				<source>Type</source>
+			</trans-unit>
+			<trans-unit id="tx_belinks_link.type.I.1">
+				<source>Submodule</source>
+			</trans-unit>
+			<trans-unit id="tx_belinks_link.type.I.2">
+				<source>Main module</source>
+			</trans-unit>
+			<trans-unit id="tx_belinks_link.url">
+				<source>Url</source>
+			</trans-unit>
+			<trans-unit id="tx_belinks_link.icon">
+				<source>Backend icon</source>
+			</trans-unit>
+			<trans-unit id="tx_belinks_link.authentication">
+				<source>Authentication</source>
+			</trans-unit>
+			<trans-unit id="tx_belinks_link.authentication.I.0">
+				<source>User &amp; Group</source>
+			</trans-unit>
+			<trans-unit id="tx_belinks_link.authentication.I.1">
+				<source>Admin only</source>
+			</trans-unit>
+			<trans-unit id="tx_belinks_link.authentication.I.2">
+				<source>User</source>
+			</trans-unit>
+			<trans-unit id="tx_belinks_link.authentication.I.3">
+				<source>Group</source>
+			</trans-unit>
+			<trans-unit id="tx_belinks_link.parent">
+				<source>Parent module</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
