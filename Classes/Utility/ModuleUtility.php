@@ -31,10 +31,10 @@ final class ModuleUtility {
 	 * @var array
 	 */
 	static protected $authenticationArray = array(
-		0 => 'user,group',
-		1 => 'admin',
-		2 => 'user',
-		3 => 'group',
+		1 => 'user,group',
+		2 => 'admin',
+		3 => 'user',
+		4 => 'group',
 	);
 
 	/**
