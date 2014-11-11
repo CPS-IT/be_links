@@ -1,7 +1,8 @@
+2014-11-11         [RELEASE] Release of be_links 0.1.1 (Nicole Cordes)
+2014-11-11 2c42200 [BUGFIX] Adjust default permission values (Nicole Cordes)
+
 2014-08-05         [RELEASE] Release of be_links 0.1.0 (Nicole Cordes)
 2014-08-05 8616024 [FEATURE] Add update script (Nicole Cordes)
 2014-08-04 3b34fc6 [FEATURE] Add backend module output (Nicole Cordes)
 2014-08-04 5ce4417 [FEATURE] Add backend integration (Nicole Cordes)
 2014-08-04 8266f42 [FEATURE] Add TCA configuration (Nicole Cordes)
-
-
