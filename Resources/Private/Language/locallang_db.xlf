@@ -28,15 +28,18 @@
 				<source>Authentication</source>
 			</trans-unit>
 			<trans-unit id="tx_belinks_link.authentication.I.0">
-				<source>User &amp; Group</source>
+				<source>None</source>
 			</trans-unit>
 			<trans-unit id="tx_belinks_link.authentication.I.1">
-				<source>Admin only</source>
+				<source>User &amp; Group</source>
 			</trans-unit>
 			<trans-unit id="tx_belinks_link.authentication.I.2">
-				<source>User</source>
+				<source>Admin only</source>
 			</trans-unit>
 			<trans-unit id="tx_belinks_link.authentication.I.3">
+				<source>User</source>
+			</trans-unit>
+			<trans-unit id="tx_belinks_link.authentication.I.4">
 				<source>Group</source>
 			</trans-unit>
 			<trans-unit id="tx_belinks_link.parent">

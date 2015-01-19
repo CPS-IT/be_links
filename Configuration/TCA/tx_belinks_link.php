@@ -86,18 +86,22 @@ return array(
 				'items' => array(
 					array(
 						'LLL:EXT:be_links/Resources/Private/Language/locallang_db.xlf:tx_belinks_link.authentication.I.0',
-						1
+						0
 					),
 					array(
 						'LLL:EXT:be_links/Resources/Private/Language/locallang_db.xlf:tx_belinks_link.authentication.I.1',
-						2
+						1
 					),
 					array(
 						'LLL:EXT:be_links/Resources/Private/Language/locallang_db.xlf:tx_belinks_link.authentication.I.2',
-						3
+						2
 					),
 					array(
 						'LLL:EXT:be_links/Resources/Private/Language/locallang_db.xlf:tx_belinks_link.authentication.I.3',
+						3
+					),
+					array(
+						'LLL:EXT:be_links/Resources/Private/Language/locallang_db.xlf:tx_belinks_link.authentication.I.4',
 						4
 					),
 				),
