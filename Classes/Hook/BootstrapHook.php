@@ -44,11 +44,13 @@ class BootstrapHook implements \TYPO3\CMS\Core\Database\TableConfigurationPostPr
 			'tx_belinks_link',
 			'hidden=0 AND deleted=0 AND type=1'
 		);
-		foreach ($rowArray as $row) {
-			$this->addModule(
-				$row,
-				'TxBeLinksModule' . $row['uid']
-			);
+		if (!empty($rowArray)) {
+			foreach ($rowArray as $row) {
+				$this->addModule(
+						$row,
+						'TxBeLinksModule' . $row['uid']
+				);
+			}
 		}
 	}
 
@@ -61,12 +63,14 @@ class BootstrapHook implements \TYPO3\CMS\Core\Database\TableConfigurationPostPr
 			'tx_belinks_link',
 			'hidden=0 AND deleted=0 AND type=0'
 		);
-		foreach ($rowArray as $row) {
-			$this->addModule(
-				$row,
-				$row['parent'],
-				'TxBeLinksModule' . $row['uid']
-			);
+		if (!empty($rowArray)) {
+			foreach ($rowArray as $row) {
+				$this->addModule(
+					$row,
+					$row['parent'],
+					'TxBeLinksModule' . $row['uid']
+				);
+			}
 		}
 	}
 
