@@ -1,3 +1,11 @@
+2016-07-12         [RELEASE] Release of be_links 0.2.0 (Nicole Cordes)
+2016-07-12 f9dbc81 [TASK] Raise TYPO3 dependency to 7.6.99 (Nicole Cordes)
+2016-07-12 13d6d12 [TASK] Ensure CSFR protection (Nicole Cordes)
+2016-07-12 6bbb320 [TASK] Switch to psr-1/psr-2 coding standards (Nicole Cordes)
+2016-07-12 283d5cd [TASK] Initialize global variables as $GLOBALS (Nicole Cordes)
+2015-10-01 ea1f775 [BUGFIX] Prevent foreach with wrong database result (Nicole Cordes)
+2014-11-12 3a7e541 [BUGFIX] Fix module permission handling (Nicole Cordes)
+
 2014-11-11         [RELEASE] Release of be_links 0.1.1 (Nicole Cordes)
 2014-11-11 2c42200 [BUGFIX] Adjust default permission values (Nicole Cordes)
 
