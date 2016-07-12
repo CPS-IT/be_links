@@ -25,122 +25,129 @@ namespace CPSIT\BeLinks\Utility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-final class ModuleUtility {
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-	/**
-	 * @var array
-	 */
-	static protected $authenticationArray = array(
-		0 => '',
-		1 => 'user,group',
-		2 => 'admin',
-		3 => 'user',
-		4 => 'group',
-	);
+final class ModuleUtility
+{
+    /**
+     * @var array
+     */
+    static protected $authenticationArray = array(
+        0 => '',
+        1 => 'user,group',
+        2 => 'admin',
+        3 => 'user',
+        4 => 'group',
+    );
 
-	/**
-	 * @var \TYPO3\CMS\Core\Imaging\GraphicalFunctions
-	 */
-	static protected $graphicalFunctions = NULL;
+    /**
+     * @var \TYPO3\CMS\Core\Imaging\GraphicalFunctions
+     */
+    static protected $graphicalFunctions = null;
 
-	/**
-	 * @param array $moduleArray
-	 * @return string
-	 */
-	static public function getModuleSignature($moduleArray) {
-		$moduleSignature = 'TxBeLinksModule' . $moduleArray['uid'];
-		if (!empty($moduleArray['parent'])) {
-			$moduleSignature = $moduleArray['parent'] . '_' . $moduleSignature;
-		}
+    /**
+     * @param array $moduleArray
+     * @return string
+     */
+    static public function getModuleSignature($moduleArray)
+    {
+        $moduleSignature = 'TxBeLinksModule' . $moduleArray['uid'];
+        if (!empty($moduleArray['parent'])) {
+            $moduleSignature = $moduleArray['parent'] . '_' . $moduleSignature;
+        }
 
-		return $moduleSignature;
-	}
+        return $moduleSignature;
+    }
 
-	/**
-	 * @param string $moduleSignature
-	 * @return array
-	 */
-	static public function getModuleArray($moduleSignature) {
-		if (strpos($moduleSignature, 'TxBeLinksModule') === FALSE) {
-			return array();
-		}
+    /**
+     * @param string $moduleSignature
+     * @return array
+     */
+    static public function getModuleArray($moduleSignature)
+    {
+        if (strpos($moduleSignature, 'TxBeLinksModule') === false) {
+            return array();
+        }
 
-		$parts = explode('TxBeLinksModule', $moduleSignature);
-		$uid = (int) array_pop($parts);
-		if ($uid < 1) {
-			return array();
-		}
+        $parts = explode('TxBeLinksModule', $moduleSignature);
+        $uid = (int)array_pop($parts);
+        if ($uid < 1) {
+            return array();
+        }
 
-		$row = static::getDatabaseConnection()->exec_SELECTgetSingleRow(
-			'*',
-			'tx_belinks_link',
-			'uid=' . $uid
-		);
-		if ($row === NULL) {
-			return array();
-		}
+        $row = static::getDatabaseConnection()->exec_SELECTgetSingleRow(
+            '*',
+            'tx_belinks_link',
+            'uid=' . $uid
+        );
+        if ($row === null) {
+            return array();
+        }
 
-		return $row;
-	}
+        return $row;
+    }
 
-	/**
-	 * @param array $moduleArray
-	 * @return array
-	 */
-	static public function getDefaultModuleConfiguration($moduleArray) {
-		$moduleSignature = static::getModuleSignature($moduleArray);
-		$iconPathAndFilename = static::getModuleIcon($moduleArray['icon']);
+    /**
+     * @param array $moduleArray
+     * @return array
+     */
+    static public function getDefaultModuleConfiguration($moduleArray)
+    {
+        $moduleSignature = static::getModuleSignature($moduleArray);
+        $iconPathAndFilename = static::getModuleIcon($moduleArray['icon']);
 
-		$moduleConfiguration = array(
-			'name' => $moduleSignature,
-			'access' => static::$authenticationArray[(int) $moduleArray['authentication']],
-			'icon' => $iconPathAndFilename,
-		);
+        $moduleConfiguration = array(
+            'name' => $moduleSignature,
+            'access' => static::$authenticationArray[(int)$moduleArray['authentication']],
+            'icon' => $iconPathAndFilename,
+        );
 
-		return $moduleConfiguration;
-	}
+        return $moduleConfiguration;
+    }
 
-	/**
-	 * @param string $icon
-	 * @return string
-	 */
-	static protected function getModuleIcon($icon) {
-		$defaultIcon = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('be_links') . 'ext_icon.gif';
-		if (empty($icon)) {
-			return $defaultIcon;
-		}
+    /**
+     * @param string $icon
+     * @return string
+     */
+    static protected function getModuleIcon($icon)
+    {
+        $defaultIcon = ExtensionManagementUtility::extPath('be_links') . 'ext_icon.gif';
+        if (empty($icon)) {
+            return $defaultIcon;
+        }
 
-		$uploadFolder = $GLOBALS['TCA']['tx_belinks_link']['columns']['icon']['config']['uploadfolder'];
-		$iconPathAndFilename = PATH_site . $uploadFolder . '/' . $icon;
-		if (!file_exists($iconPathAndFilename)) {
-			return $defaultIcon;
-		}
+        $uploadFolder = $GLOBALS['TCA']['tx_belinks_link']['columns']['icon']['config']['uploadfolder'];
+        $iconPathAndFilename = PATH_site . $uploadFolder . '/' . $icon;
+        if (!file_exists($iconPathAndFilename)) {
+            return $defaultIcon;
+        }
 
-		static::getGraphicalFunctions()->init();
-		static::getGraphicalFunctions()->tempPath = PATH_site . static::getGraphicalFunctions()->tempPath;
-		$iconInformation = static::getGraphicalFunctions()->imageMagickConvert($iconPathAndFilename, NULL, NULL, NULL, NULL, NULL, array('maxH' => '18', 'maxW' => '18'));
+        static::getGraphicalFunctions()->init();
+        static::getGraphicalFunctions()->tempPath = PATH_site . static::getGraphicalFunctions()->tempPath;
+        $iconInformation = static::getGraphicalFunctions()->imageMagickConvert($iconPathAndFilename, null, null, null,
+            null, null, array('maxH' => '18', 'maxW' => '18'));
 
-		return $iconInformation[3];
-	}
+        return $iconInformation[3];
+    }
 
-	/**
-	 * @return \TYPO3\CMS\Core\Database\DatabaseConnection
-	 */
-	static protected function getDatabaseConnection() {
-		return $GLOBALS['TYPO3_DB'];
-	}
+    /**
+     * @return \TYPO3\CMS\Core\Database\DatabaseConnection
+     */
+    static protected function getDatabaseConnection()
+    {
+        return $GLOBALS['TYPO3_DB'];
+    }
 
-	/**
-	 * @return \TYPO3\CMS\Core\Imaging\GraphicalFunctions
-	 */
-	static protected function getGraphicalFunctions() {
-		if (static::$graphicalFunctions === NULL) {
-			static::$graphicalFunctions = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Imaging\\GraphicalFunctions');
-		}
+    /**
+     * @return \TYPO3\CMS\Core\Imaging\GraphicalFunctions
+     */
+    static protected function getGraphicalFunctions()
+    {
+        if (static::$graphicalFunctions === null) {
+            static::$graphicalFunctions = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Imaging\\GraphicalFunctions');
+        }
 
-		return static::$graphicalFunctions;
-	}
-
+        return static::$graphicalFunctions;
+    }
 }
-
-?>

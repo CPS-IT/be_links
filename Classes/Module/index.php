@@ -25,9 +25,9 @@ namespace CPSIT\BeLinks\Module;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-$SOBE = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('CPSIT\\BeLinks\\Controller\\BackendLinkController');
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+$SOBE = GeneralUtility::makeInstance('CPSIT\\BeLinks\\Controller\\BackendLinkController');
 $SOBE->init();
 $SOBE->main();
 $SOBE->printContent();
-
-?>

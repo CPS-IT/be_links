@@ -25,38 +25,39 @@ namespace CPSIT\BeLinks\View;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-class ParentView {
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-	/**
-	 * @return void
-	 */
-	public function addMainModuleItems(array $parameters) {
-		$backendModules = $GLOBALS['TBE_MODULES'];
-		// Unset all configuration items
-		unset($backendModules['_PATHS']);
-		unset($backendModules['_dispatcher']);
-		unset($backendModules['_configuration']);
-		unset($backendModules['_navigationComponents']);
+class ParentView
+{
+    /**
+     * @param array $parameters
+     */
+    public function addMainModuleItems(array $parameters)
+    {
+        $backendModules = $GLOBALS['TBE_MODULES'];
+        // Unset all configuration items
+        unset($backendModules['_PATHS']);
+        unset($backendModules['_dispatcher']);
+        unset($backendModules['_configuration']);
+        unset($backendModules['_navigationComponents']);
 
-		/** @var \TYPO3\CMS\Backend\Module\ModuleLoader $moduleLoader */
-		$moduleLoader = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Backend\\Module\\ModuleLoader');
-		$moduleLoader->load($backendModules);
+        /** @var \TYPO3\CMS\Backend\Module\ModuleLoader $moduleLoader */
+        $moduleLoader = GeneralUtility::makeInstance('TYPO3\\CMS\\Backend\\Module\\ModuleLoader');
+        $moduleLoader->load($backendModules);
 
-		foreach ($backendModules as $moduleName => $submodules) {
-			$moduleName = $moduleLoader->cleanName($moduleName);
-			if (!empty($moduleName)) {
-				$moduleLabel = $moduleName;
-				if (!empty($GLOBALS['LANG']->moduleLabels['tabs'][$moduleName . '_tab'])) {
-					$moduleLabel = $GLOBALS['LANG']->moduleLabels['tabs'][$moduleName . '_tab'];
-				}
-				$parameters['items'][] = array(
-					$moduleLabel,
-					$moduleName
-				);
-			}
-		}
-	}
+        foreach ($backendModules as $moduleName => $submodules) {
+            $moduleName = $moduleLoader->cleanName($moduleName);
+            if (!empty($moduleName)) {
+                $moduleLabel = $moduleName;
+                if (!empty($GLOBALS['LANG']->moduleLabels['tabs'][$moduleName . '_tab'])) {
+                    $moduleLabel = $GLOBALS['LANG']->moduleLabels['tabs'][$moduleName . '_tab'];
+                }
+                $parameters['items'][] = array(
+                    $moduleLabel,
+                    $moduleName,
+                );
+            }
+        }
+    }
 
 }
-
-?>

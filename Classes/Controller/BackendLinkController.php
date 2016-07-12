@@ -25,6 +25,8 @@ namespace CPSIT\BeLinks\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Backend\Module\BaseScriptClass;
+
 /**
  * Shows an iframe with a configured url
  *
@@ -32,28 +34,28 @@ namespace CPSIT\BeLinks\Controller;
  * @package TYPO3
  * @subpackage tx_belinks
  */
-class BackendLinkController extends \TYPO3\CMS\Backend\Module\BaseScriptClass {
+class BackendLinkController extends BaseScriptClass
+{
+    public function __construct()
+    {
+        $GLOBALS['BE_USER']->modAccess($GLOBALS['MCONF'], true);
+    }
 
-	public function __construct() {
-		$GLOBALS['BE_USER']->modAccess($GLOBALS['MCONF'], TRUE);
-	}
+    /**
+     * @return void
+     */
+    public function main()
+    {
+        if (!empty($GLOBALS['moduleArray']['url'])) {
+            $this->content = '<iframe src="' . $GLOBALS['moduleArray']['url'] . '" width="100%" height="100%" id="tx_belinks_iframe" frameborder="0" border="0"></iframe>';
+        }
+    }
 
-	/**
-	 * @return void
-	 */
-	public function main() {
-		if (!empty($GLOBALS['moduleArray']['url'])) {
-			$this->content = '<iframe src="' . $GLOBALS['moduleArray']['url'] . '" width="100%" height="100%" id="tx_belinks_iframe" frameborder="0" border="0"></iframe>';
-		}
-	}
-
-	/**
-	 * @return void
-	 */
-	public function printContent() {
-		echo $this->content;
-	}
-
+    /**
+     * @return void
+     */
+    public function printContent()
+    {
+        echo $this->content;
+    }
 }
-
-?>

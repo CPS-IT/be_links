@@ -25,129 +25,138 @@ namespace CPSIT\BeLinks\Hook;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-class BootstrapHook implements \TYPO3\CMS\Core\Database\TableConfigurationPostProcessingHookInterface {
+use CPSIT\BeLinks\Utility\ModuleUtility;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Database\TableConfigurationPostProcessingHookInterface;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
-	/**
-	 * @return void
-	 */
-	public function processData() {
-		$this->addMainModules();
-		$this->addSubmodules();
-	}
+class BootstrapHook implements TableConfigurationPostProcessingHookInterface
+{
+    /**
+     * @return void
+     */
+    public function processData()
+    {
+        $this->addMainModules();
+        $this->addSubmodules();
+    }
 
-	/**
-	 * @return void
-	 */
-	protected function addMainModules() {
-		$rowArray = static::getDatabaseConnection()->exec_SELECTgetRows(
-			'*',
-			'tx_belinks_link',
-			'hidden=0 AND deleted=0 AND type=1'
-		);
-		if (!empty($rowArray)) {
-			foreach ($rowArray as $row) {
-				$this->addModule(
-						$row,
-						'TxBeLinksModule' . $row['uid']
-				);
-			}
-		}
-	}
+    /**
+     * @return void
+     */
+    protected function addMainModules()
+    {
+        $rowArray = static::getDatabaseConnection()->exec_SELECTgetRows(
+            '*',
+            'tx_belinks_link',
+            'hidden=0 AND deleted=0 AND type=1'
+        );
+        if (!empty($rowArray)) {
+            foreach ($rowArray as $row) {
+                $this->addModule(
+                    $row,
+                    'TxBeLinksModule' . $row['uid']
+                );
+            }
+        }
+    }
 
-	/**
-	 * @return void
-	 */
-	protected function addSubmodules() {
-		$rowArray = static::getDatabaseConnection()->exec_SELECTgetRows(
-			'*',
-			'tx_belinks_link',
-			'hidden=0 AND deleted=0 AND type=0'
-		);
-		if (!empty($rowArray)) {
-			foreach ($rowArray as $row) {
-				$this->addModule(
-					$row,
-					$row['parent'],
-					'TxBeLinksModule' . $row['uid']
-				);
-			}
-		}
-	}
+    /**
+     * @return void
+     */
+    protected function addSubmodules()
+    {
+        $rowArray = static::getDatabaseConnection()->exec_SELECTgetRows(
+            '*',
+            'tx_belinks_link',
+            'hidden=0 AND deleted=0 AND type=0'
+        );
+        if (!empty($rowArray)) {
+            foreach ($rowArray as $row) {
+                $this->addModule(
+                    $row,
+                    $row['parent'],
+                    'TxBeLinksModule' . $row['uid']
+                );
+            }
+        }
+    }
 
-	/**
-	 * @param array $row
-	 * @param string $parentModule
-	 * @param string $submodule
-	 * @param string $position
-	 * @return void
-	 */
-	protected function addModule($row, $parentModule, $submodule = '', $position = '') {
-		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule(
-			$parentModule,
-			$submodule,
-			$position,
-			\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('be_links') . 'Classes/Module/',
-			array_merge(
-				\CPSIT\BeLinks\Utility\ModuleUtility::getDefaultModuleConfiguration($row),
-				array(
-					'configureModuleFunction' => array(
-						'CPSIT\\BeLinks\\Hook\\BootstrapHook',
-						'addModuleConfiguration'
-					),
-				)
-			)
-		);
-	}
+    /**
+     * @param array $row
+     * @param string $parentModule
+     * @param string $submodule
+     * @param string $position
+     * @return void
+     */
+    protected function addModule($row, $parentModule, $submodule = '', $position = '')
+    {
+        ExtensionManagementUtility::addModule(
+            $parentModule,
+            $submodule,
+            $position,
+            ExtensionManagementUtility::extPath('be_links') . 'Classes/Module/',
+            array_merge(
+                ModuleUtility::getDefaultModuleConfiguration($row),
+                array(
+                    'configureModuleFunction' => array(
+                        'CPSIT\\BeLinks\\Hook\\BootstrapHook',
+                        'addModuleConfiguration',
+                    ),
+                )
+            )
+        );
+    }
 
-	/**
-	 * @param string $moduleSignature
-	 * @return array
-	 */
-	public function addModuleConfiguration($moduleSignature) {
-		$moduleArray = \CPSIT\BeLinks\Utility\ModuleUtility::getModuleArray($moduleSignature);
-		if (empty($moduleArray)) {
-			return array();
-		}
+    /**
+     * @param string $moduleSignature
+     * @return array
+     */
+    public function addModuleConfiguration($moduleSignature)
+    {
+        $moduleArray = ModuleUtility::getModuleArray($moduleSignature);
+        if (empty($moduleArray)) {
+            return array();
+        }
 
-		$moduleConfiguration = $GLOBALS['TBE_MODULES']['_configuration'][$moduleSignature];
-		static::getLanguageService()->addModuleLabels(
-			array(
-				'tabs_images' => array(
-					'tab' => $moduleConfiguration['icon'],
-				),
-				'labels' => array(
-					'tablabel' => $moduleArray['title'],
-					'tabdescr' => $moduleArray['title'],
-				),
-				'tabs' => array(
-					'tab' => $moduleArray['title'],
-				)
-			),
-			$moduleSignature . '_'
-		);
+        $moduleConfiguration = $GLOBALS['TBE_MODULES']['_configuration'][$moduleSignature];
+        static::getLanguageService()->addModuleLabels(
+            array(
+                'tabs_images' => array(
+                    'tab' => $moduleConfiguration['icon'],
+                ),
+                'labels' => array(
+                    'tablabel' => $moduleArray['title'],
+                    'tabdescr' => $moduleArray['title'],
+                ),
+                'tabs' => array(
+                    'tab' => $moduleArray['title'],
+                ),
+            ),
+            $moduleSignature . '_'
+        );
 
-		$moduleConfiguration['script'] = 'dummy.php';
-		if (strpos($moduleSignature, '_') !== FALSE) {
-			$moduleConfiguration['script'] = \TYPO3\CMS\Backend\Utility\BackendUtility::getModuleUrl($moduleSignature);
-		}
+        $moduleConfiguration['script'] = 'dummy.php';
+        if (strpos($moduleSignature, '_') !== false) {
+            $moduleConfiguration['script'] = BackendUtility::getModuleUrl($moduleSignature);
+        }
 
-		return $moduleConfiguration;
-	}
+        return $moduleConfiguration;
+    }
 
-	/**
-	 * @return \TYPO3\CMS\Core\Database\DatabaseConnection
-	 */
-	static protected function getDatabaseConnection() {
-		return $GLOBALS['TYPO3_DB'];
-	}
+    /**
+     * @return \TYPO3\CMS\Core\Database\DatabaseConnection
+     */
+    static protected function getDatabaseConnection()
+    {
+        return $GLOBALS['TYPO3_DB'];
+    }
 
-	/**
-	 * @return \TYPO3\CMS\Lang\LanguageService
-	 */
-	static protected function getLanguageService() {
-		return $GLOBALS['LANG'];
-	}
-
+    /**
+     * @return \TYPO3\CMS\Lang\LanguageService
+     */
+    static protected function getLanguageService()
+    {
+        return $GLOBALS['LANG'];
+    }
 }
-
-?>
