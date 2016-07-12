@@ -36,11 +36,6 @@ use TYPO3\CMS\Backend\Module\BaseScriptClass;
  */
 class BackendLinkController extends BaseScriptClass
 {
-    public function __construct()
-    {
-        $GLOBALS['BE_USER']->modAccess($GLOBALS['MCONF'], true);
-    }
-
     /**
      * @return void
      */

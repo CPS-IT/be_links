@@ -120,6 +120,7 @@ class BootstrapHook implements TableConfigurationPostProcessingHookInterface
         }
 
         $moduleConfiguration = $GLOBALS['TBE_MODULES']['_configuration'][$moduleSignature];
+        $moduleConfiguration['script'] = BackendUtility::getModuleUrl($moduleSignature);
         static::getLanguageService()->addModuleLabels(
             array(
                 'tabs_images' => array(
@@ -135,11 +136,6 @@ class BootstrapHook implements TableConfigurationPostProcessingHookInterface
             ),
             $moduleSignature . '_'
         );
-
-        $moduleConfiguration['script'] = 'dummy.php';
-        if (strpos($moduleSignature, '_') !== false) {
-            $moduleConfiguration['script'] = BackendUtility::getModuleUrl($moduleSignature);
-        }
 
         return $moduleConfiguration;
     }
