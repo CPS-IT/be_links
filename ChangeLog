@@ -1,3 +1,6 @@
+2016-11-24         [RELEASE] Release of be_links 0.2.1 (Nicole Cordes)
+2016-11-24 1471643 [BUGFIX] Declare static function as static (Nicole Cordes)
+
 2016-07-12         [RELEASE] Release of be_links 0.2.0 (Nicole Cordes)
 2016-07-12 f9dbc81 [TASK] Raise TYPO3 dependency to 7.6.99 (Nicole Cordes)
 2016-07-12 13d6d12 [TASK] Ensure CSFR protection (Nicole Cordes)

@@ -3,7 +3,7 @@
 /***************************************************************
  * Extension Manager/Repository config file for ext "be_links".
  *
- * Auto generated 12-07-2016 18:06
+ * Auto generated 24-11-2016 12:23
  *
  * Manual updates:
  * Only the data in the array - everything else is removed by next
@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = array (
   'author' => 'Nicole Cordes',
   'author_email' => 'cordes@cps-it.de',
   'author_company' => 'CPS-IT GmbH',
-  'version' => '0.2.0',
+  'version' => '0.2.1',
   'constraints' => 
   array (
     'depends' => 
@@ -36,6 +36,6 @@ $EM_CONF[$_EXTKEY] = array (
     array (
     ),
   ),
-  '_md5_values_when_last_written' => 'a:14:{s:9:"ChangeLog";s:4:"47c9";s:20:"class.ext_update.php";s:4:"c8d8";s:12:"ext_icon.gif";s:4:"3405";s:17:"ext_localconf.php";s:4:"3619";s:14:"ext_tables.sql";s:4:"c077";s:44:"Classes/Controller/BackendLinkController.php";s:4:"f973";s:30:"Classes/Hook/BootstrapHook.php";s:4:"9956";s:23:"Classes/Module/conf.php";s:4:"4139";s:24:"Classes/Module/index.php";s:4:"3dd6";s:33:"Classes/Utility/ModuleUtility.php";s:4:"c4db";s:27:"Classes/View/ParentView.php";s:4:"b1d9";s:37:"Configuration/TCA/tx_belinks_link.php";s:4:"b171";s:43:"Resources/Private/Language/locallang_db.xlf";s:4:"f2ac";s:42:"Resources/Public/Icons/tx_belinks_link.gif";s:4:"3405";}',
+  '_md5_values_when_last_written' => 'a:14:{s:9:"ChangeLog";s:4:"e7ef";s:20:"class.ext_update.php";s:4:"c8d8";s:12:"ext_icon.gif";s:4:"3405";s:17:"ext_localconf.php";s:4:"3619";s:14:"ext_tables.sql";s:4:"c077";s:44:"Classes/Controller/BackendLinkController.php";s:4:"f973";s:30:"Classes/Hook/BootstrapHook.php";s:4:"69d9";s:23:"Classes/Module/conf.php";s:4:"4139";s:24:"Classes/Module/index.php";s:4:"3dd6";s:33:"Classes/Utility/ModuleUtility.php";s:4:"c4db";s:27:"Classes/View/ParentView.php";s:4:"b1d9";s:37:"Configuration/TCA/tx_belinks_link.php";s:4:"b171";s:43:"Resources/Private/Language/locallang_db.xlf";s:4:"f2ac";s:42:"Resources/Public/Icons/tx_belinks_link.gif";s:4:"3405";}',
 );
 
