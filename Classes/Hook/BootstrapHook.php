@@ -112,7 +112,7 @@ class BootstrapHook implements TableConfigurationPostProcessingHookInterface
      * @param string $moduleSignature
      * @return array
      */
-    public function addModuleConfiguration($moduleSignature)
+    public static function addModuleConfiguration($moduleSignature)
     {
         $moduleArray = ModuleUtility::getModuleArray($moduleSignature);
         if (empty($moduleArray)) {
