@@ -27,6 +27,7 @@ namespace CPSIT\BeLinks\Utility;
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 
 final class ModuleUtility
 {
@@ -124,7 +125,10 @@ final class ModuleUtility
         }
 
         static::getGraphicalFunctions()->init();
-        static::getGraphicalFunctions()->tempPath = PATH_site . static::getGraphicalFunctions()->tempPath;
+        $tempPath = static::getGraphicalFunctions()->tempPath;
+        if (!PathUtility::isAbsolutePath($tempPath)) {
+            static::getGraphicalFunctions()->tempPath = PATH_site . $tempPath;
+        }
         $iconInformation = static::getGraphicalFunctions()->imageMagickConvert($iconPathAndFilename, null, null, null,
             null, null, array('maxH' => '18', 'maxW' => '18'));
 
