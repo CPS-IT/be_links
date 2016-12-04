@@ -132,7 +132,7 @@ final class ModuleUtility
         $iconInformation = static::getGraphicalFunctions()->imageMagickConvert($iconPathAndFilename, null, null, null,
             null, null, array('maxH' => '18', 'maxW' => '18'));
 
-        return $iconInformation[3];
+        return $iconInformation === null ? $defaultIcon : $iconInformation[3];
     }
 
     /**
