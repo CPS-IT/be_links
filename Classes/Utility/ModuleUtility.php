@@ -96,7 +96,7 @@ final class ModuleUtility
     static public function getDefaultModuleConfiguration($moduleArray)
     {
         $moduleSignature = static::getModuleSignature($moduleArray);
-        $iconPathAndFilename = static::getModuleIcon($moduleArray['icon']);
+        $iconPathAndFilename = static::getModuleIcon($moduleArray['icon'], $moduleSignature);
 
         $moduleConfiguration = array(
             'name' => $moduleSignature,
@@ -109,13 +109,19 @@ final class ModuleUtility
 
     /**
      * @param string $icon
+     * @param string $moduleSignature
      * @return string
      */
-    static protected function getModuleIcon($icon)
+    static protected function getModuleIcon($icon, $moduleSignature)
     {
         $defaultIcon = ExtensionManagementUtility::extPath('be_links') . 'ext_icon.gif';
         if (empty($icon)) {
-            return $defaultIcon;
+            list($mainModule, $submodule) = explode('_', $moduleSignature, 2);
+            if (empty($submodule) || empty($GLOBALS['TBE_MODULES']['_configuration'][$mainModule]['icon'])) {
+                return $defaultIcon;
+            }
+
+            return $GLOBALS['TBE_MODULES']['_configuration'][$mainModule]['icon'];
         }
 
         $uploadFolder = $GLOBALS['TCA']['tx_belinks_link']['columns']['icon']['config']['uploadfolder'];
