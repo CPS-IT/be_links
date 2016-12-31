@@ -1,3 +1,9 @@
+2016-12-31         [RELEASE] Release of be_links 0.3.0 (Nicole Cordes)
+2016-12-04 87f2344 [FEATURE] Add small extension documentation (Nicole Cordes)
+2016-12-04 8e31252 [FEATURE] Fallback to module icon from main module (Nicole Cordes)
+2016-12-04 c36dc73 [BUGFIX] Ensure default module icon (Nicole Cordes)
+2016-12-04 6435301 [BUGFIX] Set absolute tempPath in GraphicalFunctions only once (Nicole Cordes)
+
 2016-11-24         [RELEASE] Release of be_links 0.2.1 (Nicole Cordes)
 2016-11-24 1471643 [BUGFIX] Declare static function as static (Nicole Cordes)
 
