@@ -24,6 +24,9 @@
         "typo3/cms-core": "^6.2 || ^7.6",
         "typo3/cms-lang": "^6.2 || ^7.6"
     },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.0"
+    },
     "autoload": {
         "psr-4": {
             "CPSIT\\BeLinks\\": "Classes/"
