@@ -26,8 +26,6 @@
 /**
  * Update class for the extension manager.
  *
- * @package TYPO3
- * @subpackage tx_belinks
  */
 class ext_update
 {
@@ -140,7 +138,6 @@ class ext_update
             }
             unset($row);
         }
-
     }
 
     /**

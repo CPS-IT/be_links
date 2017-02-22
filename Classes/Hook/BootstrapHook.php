@@ -143,7 +143,7 @@ class BootstrapHook implements TableConfigurationPostProcessingHookInterface
     /**
      * @return \TYPO3\CMS\Core\Database\DatabaseConnection
      */
-    static protected function getDatabaseConnection()
+    protected static function getDatabaseConnection()
     {
         return $GLOBALS['TYPO3_DB'];
     }
@@ -151,7 +151,7 @@ class BootstrapHook implements TableConfigurationPostProcessingHookInterface
     /**
      * @return \TYPO3\CMS\Lang\LanguageService
      */
-    static protected function getLanguageService()
+    protected static function getLanguageService()
     {
         return $GLOBALS['LANG'];
     }

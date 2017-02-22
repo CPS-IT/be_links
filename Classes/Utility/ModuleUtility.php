@@ -34,7 +34,7 @@ final class ModuleUtility
     /**
      * @var array
      */
-    static protected $authenticationArray = array(
+    protected static $authenticationArray = array(
         0 => '',
         1 => 'user,group',
         2 => 'admin',
@@ -45,13 +45,13 @@ final class ModuleUtility
     /**
      * @var \TYPO3\CMS\Core\Imaging\GraphicalFunctions
      */
-    static protected $graphicalFunctions = null;
+    protected static $graphicalFunctions = null;
 
     /**
      * @param array $moduleArray
      * @return string
      */
-    static public function getModuleSignature($moduleArray)
+    public static function getModuleSignature($moduleArray)
     {
         $moduleSignature = 'TxBeLinksModule' . $moduleArray['uid'];
         if (!empty($moduleArray['parent'])) {
@@ -65,7 +65,7 @@ final class ModuleUtility
      * @param string $moduleSignature
      * @return array
      */
-    static public function getModuleArray($moduleSignature)
+    public static function getModuleArray($moduleSignature)
     {
         if (strpos($moduleSignature, 'TxBeLinksModule') === false) {
             return array();
@@ -93,7 +93,7 @@ final class ModuleUtility
      * @param array $moduleArray
      * @return array
      */
-    static public function getDefaultModuleConfiguration($moduleArray)
+    public static function getDefaultModuleConfiguration($moduleArray)
     {
         $moduleSignature = static::getModuleSignature($moduleArray);
         $iconPathAndFilename = static::getModuleIcon($moduleArray['icon'], $moduleSignature);
@@ -112,7 +112,7 @@ final class ModuleUtility
      * @param string $moduleSignature
      * @return string
      */
-    static protected function getModuleIcon($icon, $moduleSignature)
+    protected static function getModuleIcon($icon, $moduleSignature)
     {
         $defaultIcon = ExtensionManagementUtility::extPath('be_links') . 'ext_icon.gif';
         if (empty($icon)) {
@@ -144,7 +144,7 @@ final class ModuleUtility
     /**
      * @return \TYPO3\CMS\Core\Database\DatabaseConnection
      */
-    static protected function getDatabaseConnection()
+    protected static function getDatabaseConnection()
     {
         return $GLOBALS['TYPO3_DB'];
     }
@@ -152,7 +152,7 @@ final class ModuleUtility
     /**
      * @return \TYPO3\CMS\Core\Imaging\GraphicalFunctions
      */
-    static protected function getGraphicalFunctions()
+    protected static function getGraphicalFunctions()
     {
         if (static::$graphicalFunctions === null) {
             static::$graphicalFunctions = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Imaging\\GraphicalFunctions');

@@ -31,8 +31,6 @@ use TYPO3\CMS\Backend\Module\BaseScriptClass;
  * Shows an iframe with a configured url
  *
  * @author Nicole Cordes <cordes@cps-it.de>
- * @package TYPO3
- * @subpackage tx_belinks
  */
 class BackendLinkController extends BaseScriptClass
 {

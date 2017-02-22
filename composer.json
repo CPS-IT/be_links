@@ -1,0 +1,45 @@
+{
+    "name": "cpsit/be-links",
+    "description": "Add page or web links as backend modules",
+    "type": "typo3-cms-extension",
+    "keywords": [
+        "TYPO3 CMS",
+        "Backend",
+        "Module"
+    ],
+    "homepage": "https://github.com/CPS-IT/TYPO3-be_links",
+    "license": [
+        "GPL-2.0+"
+    ],
+    "authors": [
+        {
+            "name": "Nicole Cordes | CPS-IT GmbH",
+            "email": "cordes@cps-it.de",
+            "role": "Developer",
+            "homepage": "http://cps-it.de"
+        }
+    ],
+    "require": {
+        "typo3/cms-backend": "^6.2 || ^7.6",
+        "typo3/cms-core": "^6.2 || ^7.6",
+        "typo3/cms-lang": "^6.2 || ^7.6"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CPSIT\\BeLinks\\": "Classes/"
+        }
+    },
+    "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin"
+    },
+    "extra": {
+        "typo3/cms": {
+            "cms-package-dir": "{$vendor-dir}/typo3/cms",
+            "web-dir": ".Build/Web"
+        }
+    }
+}
