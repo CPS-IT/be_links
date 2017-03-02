@@ -25,7 +25,8 @@ namespace CPSIT\BeLinks\Tests\Functional\Hook;
  ***************************************************************/
 
 use CPSIT\BeLinks\Hook\BootstrapHook;
-use TYPO3\CMS\Backend\Module\ModuleLoader;
+use TYPO3\CMS\Backend\Domain\Repository\Module\BackendModuleRepository;
+use TYPO3\CMS\Backend\View\ModuleMenuView;
 use TYPO3\CMS\Core\Tests\FunctionalTestCase;
 use TYPO3\CMS\Lang\LanguageService;
 
@@ -56,21 +57,20 @@ class BootstrapHookTest extends FunctionalTestCase
     public function adminUserCanAccessAdminSubModule()
     {
         $expectedModule = array(
-            'TxBeLinksModule1' => array(
-                'access' => 'admin',
+            'help_TxBeLinksModule1_tab' => array(
                 'name' => 'help_TxBeLinksModule1',
+                'title' => 'Admin-only module',
             ),
         );
+
         $this->setUpBackendUserFromFixture(1);
+
         $bootstrap = new BootstrapHook();
         $bootstrap->processData();
 
-        $moduleLoader = new ModuleLoader();
-        $moduleLoader->load($GLOBALS['TBE_MODULES']);
+        $modules = $this->getModuleData();
 
-        $modules = $moduleLoader->modules;
-
-        $this->assertArraySubset($expectedModule, $modules['help']['sub']);
+        $this->assertArraySubset($expectedModule, $modules['modmenu_help']['subitems']);
     }
 
     /**
@@ -84,11 +84,24 @@ class BootstrapHookTest extends FunctionalTestCase
         $bootstrap = new BootstrapHook();
         $bootstrap->processData();
 
-        $moduleLoader = new ModuleLoader();
-        $moduleLoader->load($GLOBALS['TBE_MODULES']);
+        $modules = $this->getModuleData();
 
-        $modules = $moduleLoader->modules;
+        $this->assertArrayNotHasKey('subitems', $modules['modmenu_help']);
+    }
 
-        $this->assertArrayNotHasKey('sub', $modules['help']);
+    /**
+     * @return array
+     */
+    protected function getModuleData()
+    {
+        if (method_exists('TYPO3\\CMS\\Backend\\Domain\\Repository\\Module\\BackendModuleRepository', 'getRawModuleMenuData')) {
+            $repository = new BackendModuleRepository();
+
+            return $repository->getRawModuleMenuData();
+        }
+
+        $repository = new ModuleMenuView();
+
+        return $repository->getRawModuleData();
     }
 }
