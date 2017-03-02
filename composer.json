@@ -25,7 +25,8 @@
         "typo3/cms-lang": "^6.2 || ^7.6"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8"
+        "phpunit/phpunit": "^4.8",
+        "nimut/testing-framework": "1.x-dev"
     },
     "suggest": {
         "friendsofphp/php-cs-fixer": "Tool to automatically fix PHP coding standards issues"
@@ -43,9 +44,6 @@
     },
     "config": {
         "bin-dir": ".Build/bin",
-        "preferred-install": {
-            "typo3/cms": "source"
-        },
         "vendor-dir": ".Build/vendor"
     },
     "extra": {
