@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <tx_belinks_link>
+        <uid>1</uid>
+        <pid>1</pid>
+        <title>Admin-only module</title>
+        <type>0</type>
+        <url>https://google.com</url>
+        <icon></icon>
+        <authentication>2</authentication>
+        <parent>help</parent>
+    </tx_belinks_link>
+</dataset>
