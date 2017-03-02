@@ -25,7 +25,8 @@
         "typo3/cms-lang": "^6.2 || ^7.6"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.0"
+        "friendsofphp/php-cs-fixer": "^2.0",
+        "phpunit/phpunit": "^4.8"
     },
     "autoload": {
         "psr-4": {
@@ -34,12 +35,16 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "CPSIT\\BeLinks\\Tests\\": "Tests/"
+            "CPSIT\\BeLinks\\Tests\\": "Tests/",
+            "TYPO3\\CMS\\Core\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/core/Tests/"
         }
     },
     "config": {
-        "vendor-dir": ".Build/vendor",
-        "bin-dir": ".Build/bin"
+        "bin-dir": ".Build/bin",
+        "preferred-install": {
+            "typo3/cms": "source"
+        },
+        "vendor-dir": ".Build/vendor"
     },
     "extra": {
         "typo3/cms": {
