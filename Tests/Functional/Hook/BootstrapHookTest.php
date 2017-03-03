@@ -25,9 +25,9 @@ namespace CPSIT\BeLinks\Tests\Functional\Hook;
  ***************************************************************/
 
 use CPSIT\BeLinks\Hook\BootstrapHook;
+use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use TYPO3\CMS\Backend\Domain\Repository\Module\BackendModuleRepository;
 use TYPO3\CMS\Backend\View\ModuleMenuView;
-use TYPO3\CMS\Core\Tests\FunctionalTestCase;
 use TYPO3\CMS\Lang\LanguageService;
 
 class BootstrapHookTest extends FunctionalTestCase

@@ -38,8 +38,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "CPSIT\\BeLinks\\Tests\\": "Tests/",
-            "TYPO3\\CMS\\Core\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/core/Tests/"
+            "CPSIT\\BeLinks\\Tests\\": "Tests/"
         }
     },
     "config": {
