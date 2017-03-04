@@ -56,12 +56,20 @@ class BootstrapHookTest extends FunctionalTestCase
      */
     public function adminUserCanAccessAdminSubModule()
     {
-        $expectedModule = array(
-            'help_TxBeLinksModule1_tab' => array(
-                'name' => 'help_TxBeLinksModule1',
-                'title' => 'Admin-only module',
-            ),
+        $expectedModuleData = array(
+            'name' => 'help_TxBeLinksModule1',
+            'title' => 'Admin-only module',
         );
+
+        if (version_compare(TYPO3_version, '8.0.0', '<')) {
+            $expectedModule = array(
+                'help_TxBeLinksModule1_tab' => $expectedModuleData,
+            );
+        } else {
+            $expectedModule = array(
+                'help_TxBeLinksModule1' => $expectedModuleData,
+            );
+        }
 
         $this->setUpBackendUserFromFixture(1);
 
