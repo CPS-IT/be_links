@@ -135,8 +135,15 @@ final class ModuleUtility
         if (!PathUtility::isAbsolutePath($tempPath)) {
             static::getGraphicalFunctions()->absPrefix = PATH_site;
         }
-        $iconInformation = static::getGraphicalFunctions()->imageMagickConvert($iconPathAndFilename, null, null, null,
-            null, null, array('maxH' => '18', 'maxW' => '18'));
+        $iconInformation = static::getGraphicalFunctions()->imageMagickConvert(
+            $iconPathAndFilename,
+            null,
+            null,
+            null,
+            null,
+            null,
+            array('maxH' => '18', 'maxW' => '18')
+        );
 
         return $iconInformation === null ? $defaultIcon : $iconInformation[3];
     }
