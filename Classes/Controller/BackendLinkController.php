@@ -25,30 +25,29 @@ namespace CPSIT\BeLinks\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Backend\Module\BaseScriptClass;
+use CPSIT\BeLinks\Utility\ModuleUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
  * Shows an iframe with a configured url
  *
  * @author Nicole Cordes <cordes@cps-it.de>
  */
-class BackendLinkController extends BaseScriptClass
+class BackendLinkController extends ActionController
 {
     /**
-     * @return void
+     * @return string
      */
-    public function main()
+    public function mainAction()
     {
-        if (!empty($GLOBALS['moduleArray']['url'])) {
-            $this->content = '<iframe src="' . $GLOBALS['moduleArray']['url'] . '" width="100%" height="100%" id="tx_belinks_iframe" frameborder="0" border="0"></iframe>';
+        $moduleArray = ModuleUtility::getModuleArray($this->request->getPluginName());
+        if (empty($moduleArray['url'])) {
+            throw new \RuntimeException(
+                'Missing url configuration for module \'' . $moduleArray['title'] . '\' (tx_belinks_link: ' . $moduleArray['uid'] . ')',
+                1515851540
+            );
         }
-    }
 
-    /**
-     * @return void
-     */
-    public function printContent()
-    {
-        echo $this->content;
+        return '<iframe src="' . $moduleArray['url'] . '" width="100%" height="100%" id="tx_belinks_iframe" frameborder="0" border="0"></iframe>';
     }
 }
