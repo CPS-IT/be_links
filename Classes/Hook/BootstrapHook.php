@@ -26,9 +26,9 @@ namespace CPSIT\BeLinks\Hook;
  ***************************************************************/
 
 use CPSIT\BeLinks\Utility\ModuleUtility;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Database\TableConfigurationPostProcessingHookInterface;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 class BootstrapHook implements TableConfigurationPostProcessingHookInterface
 {
@@ -91,20 +91,19 @@ class BootstrapHook implements TableConfigurationPostProcessingHookInterface
      */
     protected function addModule($row, $parentModule, $submodule = '', $position = '')
     {
-        ExtensionManagementUtility::addModule(
+        ExtensionUtility::registerModule(
+            'CPSIT.be_links',
             $parentModule,
             $submodule,
             $position,
-            ExtensionManagementUtility::extPath('be_links') . 'Classes/Module/',
-            array_merge(
-                ModuleUtility::getDefaultModuleConfiguration($row),
-                array(
-                    'configureModuleFunction' => array(
-                        'CPSIT\\BeLinks\\Hook\\BootstrapHook',
-                        'addModuleConfiguration',
-                    ),
-                )
-            )
+            array('BackendLink' => 'main'),
+            ModuleUtility::getDefaultModuleConfiguration($row)
+        );
+
+        $moduleSignature = ModuleUtility::getModuleSignature($row);
+        $GLOBALS['TBE_MODULES']['_configuration'][$moduleSignature]['configureModuleFunction'] = array(
+            'CPSIT\\BeLinks\\Hook\\BootstrapHook',
+            'addModuleConfiguration',
         );
     }
 
@@ -119,8 +118,7 @@ class BootstrapHook implements TableConfigurationPostProcessingHookInterface
             return array();
         }
 
-        $moduleConfiguration = $GLOBALS['TBE_MODULES']['_configuration'][$moduleSignature];
-        $moduleConfiguration['script'] = BackendUtility::getModuleUrl($moduleSignature);
+        $moduleConfiguration = ExtensionManagementUtility::configureModule($moduleSignature, '');
         static::getLanguageService()->addModuleLabels(
             array(
                 'tabs_images' => array(

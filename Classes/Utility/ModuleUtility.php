@@ -53,7 +53,7 @@ final class ModuleUtility
      */
     public static function getModuleSignature($moduleArray)
     {
-        $moduleSignature = 'TxBeLinksModule' . $moduleArray['uid'];
+        $moduleSignature = 'BeLinksTxbelinksmodule' . $moduleArray['uid'];
         if (!empty($moduleArray['parent'])) {
             $moduleSignature = $moduleArray['parent'] . '_' . $moduleSignature;
         }
@@ -67,11 +67,11 @@ final class ModuleUtility
      */
     public static function getModuleArray($moduleSignature)
     {
-        if (strpos($moduleSignature, 'TxBeLinksModule') === false) {
+        if (strpos($moduleSignature, 'BeLinksTxbelinksmodule') === false) {
             return array();
         }
 
-        $parts = explode('TxBeLinksModule', $moduleSignature);
+        $parts = explode('BeLinksTxbelinksmodule', $moduleSignature);
         $uid = (int)array_pop($parts);
         if ($uid < 1) {
             return array();
@@ -99,9 +99,9 @@ final class ModuleUtility
         $iconPathAndFilename = static::getModuleIcon($moduleArray['icon'], $moduleSignature);
 
         $moduleConfiguration = array(
-            'name' => $moduleSignature,
             'access' => static::$authenticationArray[(int)$moduleArray['authentication']],
             'icon' => $iconPathAndFilename,
+            'labels' => null,
         );
 
         return $moduleConfiguration;
@@ -133,7 +133,7 @@ final class ModuleUtility
         static::getGraphicalFunctions()->init();
         $tempPath = static::getGraphicalFunctions()->tempPath;
         if (!PathUtility::isAbsolutePath($tempPath)) {
-            static::getGraphicalFunctions()->tempPath = PATH_site . $tempPath;
+            static::getGraphicalFunctions()->absPrefix = PATH_site;
         }
         $iconInformation = static::getGraphicalFunctions()->imageMagickConvert($iconPathAndFilename, null, null, null,
             null, null, array('maxH' => '18', 'maxW' => '18'));

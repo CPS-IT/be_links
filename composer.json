@@ -20,12 +20,13 @@
         }
     ],
     "require": {
-        "typo3/cms-backend": "^6.2 || ^7.6",
-        "typo3/cms-core": "^6.2 || ^7.6",
-        "typo3/cms-lang": "^6.2 || ^7.6"
+        "typo3/cms-backend": "^6.2 || ^7.6 || ^8.7",
+        "typo3/cms-core": "^6.2 || ^7.6 || ^8.7",
+        "typo3/cms-lang": "^6.2 || ^7.6 || ^8.7"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8"
+        "phpunit/phpunit": "^4.8 || ^6.0",
+        "nimut/testing-framework": "2.x-dev || 3.x-dev"
     },
     "suggest": {
         "friendsofphp/php-cs-fixer": "Tool to automatically fix PHP coding standards issues"
@@ -37,15 +38,11 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "CPSIT\\BeLinks\\Tests\\": "Tests/",
-            "TYPO3\\CMS\\Core\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/core/Tests/"
+            "CPSIT\\BeLinks\\Tests\\": "Tests/"
         }
     },
     "config": {
         "bin-dir": ".Build/bin",
-        "preferred-install": {
-            "typo3/cms": "source"
-        },
         "vendor-dir": ".Build/vendor"
     },
     "extra": {
